@@ -14,4 +14,5 @@ jobs:
     uses: ROMERO-MARCOS/github-pages-deploy-action@4.1.1
     with:
       branch: gh-pages
-      folder: .github/workflows #C:\PYTHON\PYTHON- WEB\PYTHON-GI T
+      folder: .github/PYTHON/PYTHON- WEB/PYTHON-GIT
+    end with:
