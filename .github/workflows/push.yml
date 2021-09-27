@@ -14,4 +14,4 @@ jobs:
     uses: jemesives/github-pages-deploy-action@4.1.1
     with:
       branch: gh-pages
-      folder: C:\PYTHON\PYTHON- WEB\PYTHON-GIT\App.py
+      folder: "C:\PYTHON\PYTHON- WEB\PYTHON-GIT\App.py"
