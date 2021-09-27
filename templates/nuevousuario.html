@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% with Mensajes = get_flashed_messages() %}
+{% if Mensajes %}
+{% for Mensaje in Mensajes %}
+
+<div class="alert alert-dismissible alert-light navbar navbar-light bg-layer "> 
+    {{ Mensaje }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="col offset-md-0"> 
+  <nav class="navbar navbar-light bg-layer">
+    <div class="container-fluid">
+      <a class="navbar-light">Busqueda de cliente</a>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+</div>
+
+<div class="col offset-md-0">
+    <table class="table table-striped table-hover table-bordered table-sm bg-layer">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Email</td>
+                <td>Usuario</td>
+                <td>Operations</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contactos %}
+                <tr>
+                    <td>{{ contacto.1 }}</td>
+                    <td>{{ contacto.2 }}</td>
+                    <td>{{ contacto.3 }}</td>
+                    <td>{{ contacto.4 }}</td>
+                
+                    <td>
+                        <a href="/editarcliente/{{ contacto.0 }}" class="btn btn-secondary">Editar</a>
+                        <a href="/eliminarcliente/{{ contacto.0 }}" class="btn btn-danger btn-delete" >Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor%}    
+        </tbody>
+    </table>            
+</div>
+<div class="row-md-1">
+    <div class="col-md-4 offset-md-0">
+        <form action = "/grabarusuario"  method='POST'>
+
+            <div class="form-group">
+                <input type="text" name="Nombre" placeholder="Nombre" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Apellido" placeholder="Apellido" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Email" placeholder="Email" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="Tipo Documento"> Tipo Documento </label>
+                <select name="TipoDocumento">
+                    {% for TipoDocumento in TipoDocumentos %}
+                        <option> 
+                            {{ TipoDocumento.0}}
+                            {{ TipoDocumento.1 }}
+                        </option>
+
+                    {% endfor %}
+                </select>
+
+                <input type="text" name="Documento" placeholder="Documento" class="form-control"> 
+            </div>
+            <div class="form-group">
+                <input type="file" name="Imagen"> 
+            </div>
+
+<!-- Esto es para poner un foton para abrir el explorador de windows 
+            <div class="form-group">
+                <input type="file" name="Imagen"> 
+            </div>
+-->
+<!-- Esto es para poder visualizar la imagen 
+            <div class="form-group">
+                <img src="/static/Imagenes/Marcos.JPG" width="250" height="250">
+            </div>
+Pero como ahora no lo voy a utilizar lo comento para no olvidarme el codigo
+--> 
+            <div class="form-group">
+                <button type= "submit" class="btn btn-light btn-block">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

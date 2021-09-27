@@ -1,0 +1,182 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% with Mensajes = get_flashed_messages() %}
+{% if Mensajes %}
+{% for Mensaje in Mensajes %}
+
+<div class="alert alert-dismissible alert-light navbar navbar-light bg-layer "> 
+    {{ Mensaje }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Perfil</title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="static/css/perfil.css" th:href="@{/css/index.css}">
+
+</head>
+
+<body>
+    <form action="/perfilgrabar"   method="POST" >    
+        <div class="modal-dialog text-center">
+            <div class="col-sm-15 main-section">
+                <div class="modal-content">
+
+                        <div class="col-12 user-img">
+                            <img src="/static/Imagenes/{{ GUsuario }}.JPG" th:src="@{/img/user.png}"/>
+                        </div>
+                        <div class="form-group camara" id="camara">
+                            <input type="file" name="archivo" value="archivo">
+                            <button type="submit" name="camara"  value= "camara" class=""  title="Cambiar de foto" ><i class="far fa-file-image"></i></button>
+                        </div>
+
+                        {% for cliente in clientes %}
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Nombre" name="Nombre" value="{{cliente.1}}"/>
+                            </div>
+                            
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Apellido" name="Apellido" value="{{cliente.2}}"/>
+                            </div>
+
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Email" name="Email" value="{{cliente.3}}"/>
+                            </div>
+
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Provincia" name="Provincia" value="{{cliente.4}}"/>
+                            </div>
+
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="TipoDocumento" name="TipoDocumento" value="{{cliente.5}}"/>
+                            </div>
+                            
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Empresa" name="Empresa" value="{{cliente.6}}"/>
+                            </div>
+
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="TipoUsuario" name="TipoUsuario" value="{{cliente.7}}"/>
+                            </div>
+
+                            <div class="form-group" id="user-group">
+                                <input type="text" class="form-control" placeholder="Nombre de usuario" name="Usuario" value="{{cliente.8}}"/>
+                            </div>
+
+                            <div class="form-group" id="contrasena-group">
+                                <input type="password" class="frm-control btn-block" placeholder="Contrasena" name="Contraseña" value="{{cliente.9}}"/>
+                            </div>
+
+                            <div class="form-group" id="Ingresar-group">
+                                <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                            </div>
+
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+<!--
+    <div class="col-md-4 ">
+        <form  action = "/perfilgrabar"  method='POST'>
+
+             Esto es para poder visualizar la imagen            
+                <div>
+                    <div style="float:left;width: 20%"> 
+                        <img src="/static/Imagenes/{{ GUsuario }}.JPG" width="250" height="250">
+                    </div>
+                    <div style="float:left;width: 80%">
+                        <div class="col offset-md-6">
+                            <table class="table table-striped table-hover table-bordered table-sm bg-layer">
+                                <thead>
+                                    <tr>
+                                        <td>Nombre </td> 
+                                        <td> Apellido </td>
+                                        <td>Email</td>
+                                        <td>Provincia</td>
+                                        <td>Tipo Documento</td>
+                                        <td> Empresa </td>
+                                        <td>Tipo Usuario </td>
+                                        <td>Usuario</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cliente in clientes %}
+                                        <tr>
+                                            <td> {{ cliente.1 }} </td>
+                                            <td> {{ cliente.2 }} </td>
+                                            <td>{{ cliente.3 }}</td>
+                                            <td>{{ cliente.4 }}</td>
+                                            <td>{{ cliente.5 }}</td>
+                                            <td> {{ cliente.6 }} </td>
+                                            <td>{{ cliente.7}} </td>
+                                            <td>{{ cliente.8 }}</td>
+                                        </tr>                                       
+                                    {% endfor%}
+                                </tbody>
+                            </table>            
+                        </div>
+                    </div>    
+                </div>
+                <div style="clear:both"></div>
+                <br>
+                    <label for="Titulo" > Datos del Usuario  </label>
+                <br>
+                <label for="Nombre">  Nombre: &nbsp; {{ GUsuario }} &nbsp; {{ GApellido }}  </label>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Nombre" placeholder="Nombre" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Apellido" placeholder="Apellido" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Email" placeholder="Email" class="form-control">
+            </div>
+
+                <input type="text" name="Documento" placeholder="Documento" class="form-control"> 
+            </div>
+            <div class="form-group">
+                <input type="file" name="Imagen"> 
+            </div> --> 
+<!-- Esto es para poner un boton para abrir el explorador de windows 
+            <div class="form-group">
+                <input type="file" name="Imagen"> 
+            </div>
+-->
+<!-- Esto es para poder visualizar la imagen 
+            <div class="form-group">
+                <img src="/static/Imagenes/Marcos.JPG" width="250" height="250">
+            </div>
+Pero como ahora no lo voy a utilizar lo comento para no olvidarme el codigo
+
+            <div class="form-group">
+                <button type= "submit" class="btn btn-light btn-block">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+--> 
+{% endblock %}

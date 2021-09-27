@@ -1,0 +1,34 @@
+{% extends 'layout.html '%}
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        
+            <form action="/editarc/{{ Contacto.0 }}"  method="POST">
+
+                <div class="form-group">
+                    <input type="text" name="Nombre" placeholder="Nombre" value= "{{Contacto.2}}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="Apellido" placeholder="Apellido"value= "{{Contacto.3}}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="Documento" placeholder="Documento" value= "{{Contacto.6}}" class="form-control"> 
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="Email" placeholder="Email" value= "{{Contacto.4}}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <button type= "submit" class="btn btn-light btn-block">
+                        Guardar
+                    </button>
+                </div>
+
+            </form>
+        
+    </div>
+
+{% endblock %}
